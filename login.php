@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['password'])) {
-                echo "Login successful! Welcome, " . htmlspecialchars($user['name']);
+                echo "\nLogin successful! Welcome, " . htmlspecialchars($user['name']);
             } else {
                 echo "Invalid password.";
             }
