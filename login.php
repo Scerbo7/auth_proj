@@ -1,5 +1,5 @@
 <?php
-require 'includes/db.php';
+require 'includes/db_connect.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
