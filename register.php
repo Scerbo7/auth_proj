@@ -1,4 +1,4 @@
-<?php
+<?<?php
 require 'includes/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -6,18 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
 
-    try {
-        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([
-            ':name' => $name,
-            ':email' => $email,
-            ':password' => $password
-        ]);
+    $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $name, $email, $password);
+
+    if ($stmt->execute()) {
         echo "Registration successful! <a href='login.php'>Login</a>";
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+    } else {
+        echo "Error: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
 
