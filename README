@@ -1,1 +1,7 @@
-
+CSE 389 Agenda Website Project
+Installation and debugging:
+1. Install XAMPP
+2. Have APACHE and MySQL running on XAMPP control panel
+3. Clone the repository within htdoc folder of XAMPP
+4. In browser type http://localhost/auth_proj/ to be directed to main page
+5. Register and login with user details
