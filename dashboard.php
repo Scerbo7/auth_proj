@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 include 'db_connect.php';
 
 // Handle form submission to add a new schedule item
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_event'])) {
     $event_name = trim($_POST['event_name']);
     $event_date = trim($_POST['event_date']);
 
@@ -26,6 +26,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $error_message = "Both event name and date are required.";
     }
+}
+
+// Handle event deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_event'])) {
+    $event_id = intval($_POST['event_id']);
+    $stmt = $conn->prepare("DELETE FROM schedules WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("ii", $event_id, $_SESSION['user_id']);
+
+    if ($stmt->execute()) {
+        $success_message = "Event removed successfully!";
+    } else {
+        $error_message = "Failed to remove event: " . $stmt->error;
+    }
+
+    $stmt->close();
 }
 
 // Fetch the user's schedule
@@ -90,8 +105,9 @@ $stmt->close();
             color: #2575fc;
             border: none;
             border-radius: 5px;
-            padding: 10px 20px;
+            padding: 5px 10px;
             font-weight: bold;
+            margin: 5px;
         }
         .btn-custom:hover {
             background-color: #2575fc;
@@ -129,7 +145,7 @@ $stmt->close();
                 <label for="event_date" class="form-label">Event Date</label>
                 <input type="date" class="form-control" id="event_date" name="event_date" required>
             </div>
-            <button type="submit" class="btn btn-custom w-100">Add Event</button>
+            <button type="submit" name="add_event" class="btn btn-custom w-100">Add Event</button>
         </form>
 
         <!-- Success or Error Message -->
@@ -148,6 +164,7 @@ $stmt->close();
                         <tr>
                             <th>Event</th>
                             <th>Date</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -155,6 +172,12 @@ $stmt->close();
                             <tr>
                                 <td><?php echo htmlspecialchars($event['event_name']); ?></td>
                                 <td><?php echo htmlspecialchars($event['event_date']); ?></td>
+                                <td>
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="event_id" value="<?php echo $event['id']; ?>">
+                                        <button type="submit" name="delete_event" class="btn btn-custom">Remove</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
