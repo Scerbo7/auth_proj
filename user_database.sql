@@ -8,5 +8,9 @@ CREATE TABLE users (
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 );
 s
+=======
+);
+>>>>>>> 57e433c064ecc2f7c60daa5620acdd038b9389eb
