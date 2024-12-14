@@ -62,10 +62,6 @@
             <a href="login.php" class="btn btn-custom mx-2">Login</a>
             <a href="register.php" class="btn btn-custom mx-2">Register</a>
         </div>
-        <!-- Import Database Button -->
-        <div class="btn-container mt-3">
-            <a href="import_database.php" class="btn btn-custom">Import Database</a>
-        </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
