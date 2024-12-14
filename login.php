@@ -1,37 +1,50 @@
 <?php
+// Include the database connection file to access the database
 include 'db_connect.php';
+// Start the session to manage user login and session variables
 session_start();
 
+// Check if the request method is POST (i.e., form submission)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve and trim the email and password input fields to remove extra spaces
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
+    // Validate that both email and password fields are not empty
     if (empty($email) || empty($password)) {
-        die("Both fields are required.");
+        die("Both fields are required."); // Stop execution if validation fails
     }
 
+    // Prepare an SQL query to retrieve the user details based on the email
     $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("s", $email); // Bind the email parameter to the query
     $stmt->execute();
-    $stmt->store_result();
+    $stmt->store_result(); // Store the query result for further processing
 
+    // Check if a user with the provided email exists
     if ($stmt->num_rows > 0) {
+        // Bind the result columns to variables
         $stmt->bind_result($id, $username, $hashed_password);
-        $stmt->fetch();
+        $stmt->fetch(); // Fetch the result from the query
 
+        // Verify the entered password against the hashed password in the database
         if (password_verify($password, $hashed_password)) {
+            // Store user ID and username in session variables for logged-in state
             $_SESSION['user_id'] = $id;
             $_SESSION['name'] = $username;
-            header("Location: dashboard.php");
-            exit();
+            header("Location: dashboard.php"); // Redirect to the dashboard page
+            exit(); // Stop further script execution after redirection
         } else {
+            // Output an error message if the password doesn't match
             echo "Incorrect email or password.";
         }
     } else {
+        // Output an error message if no user exists with the provided email
         echo "No account found with that email.";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
