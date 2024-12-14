@@ -1,8 +1,12 @@
 <?php
 // Database connection parameters
-$servername = "localhost";
-$username = "root"; // Change this if your MySQL user is different
-$password = ""; // Change this if your MySQL password is not empty
+// username is if0_37913243
+// servername is sql112.infinityfree.com
+// database name is if0_37913243_389_database
+// password is vPtaQzgz8f0P
+$servername = "localhost"; // this would be changed to name from InfinityFree
+$username = "root"; // this would be changed to username from InfinityFree
+$password = ""; // same conditions as previous two
 $database_name = '389_database';
 
 // Create connection
