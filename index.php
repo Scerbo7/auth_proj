@@ -43,6 +43,15 @@
             background-color: #2575fc;
             color: white;
         }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-container a {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -52,6 +61,10 @@
         <div class="d-flex justify-content-center mt-4">
             <a href="login.php" class="btn btn-custom mx-2">Login</a>
             <a href="register.php" class="btn btn-custom mx-2">Register</a>
+        </div>
+        <!-- Import Database Button -->
+        <div class="btn-container mt-3">
+            <a href="import_database.php" class="btn btn-custom">Import Database</a>
         </div>
     </div>
     <!-- Bootstrap JS -->

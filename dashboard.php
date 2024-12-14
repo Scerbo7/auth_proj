@@ -148,45 +148,33 @@ $stmt->close();
             <button type="submit" name="add_event" class="btn btn-custom w-100">Add Event</button>
         </form>
 
-        <!-- Success or Error Message -->
-        <?php if (isset($success_message)): ?>
-            <div class="alert alert-success mt-3"><?php echo $success_message; ?></div>
-        <?php elseif (isset($error_message)): ?>
-            <div class="alert alert-danger mt-3"><?php echo $error_message; ?></div>
-        <?php endif; ?>
-
-        <!-- Schedule List -->
+        <!-- Display Schedule -->
         <div class="schedule-list">
             <h2>Your Schedule</h2>
-            <?php if (count($schedule) > 0): ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Event</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($schedule as $event): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($event['event_name']); ?></td>
-                                <td><?php echo htmlspecialchars($event['event_date']); ?></td>
-                                <td>
-                                    <form method="POST" style="display:inline;">
-                                        <input type="hidden" name="event_id" value="<?php echo $event['id']; ?>">
-                                        <button type="submit" name="delete_event" class="btn btn-custom">Remove</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <p>No events added yet.</p>
-            <?php endif; ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($schedule as $event): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($event['event_name']); ?></td>
+                        <td><?php echo htmlspecialchars($event['event_date']); ?></td>
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="event_id" value="<?php echo $event['id']; ?>">
+                                <button type="submit" name="delete_event" class="btn btn-custom">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
