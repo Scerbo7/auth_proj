@@ -71,5 +71,5 @@ if ($conn->query($create_posts_table) !== TRUE) {
 }
 
 // Close connection
-$conn->close();
+//$conn->close();
 ?>
