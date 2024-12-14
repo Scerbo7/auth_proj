@@ -74,16 +74,19 @@ $stmt->close();
         }
         nav {
             background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
+            padding: 20px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 20px;
         }
         nav a {
             color: white;
             text-decoration: none;
             font-weight: bold;
             margin-right: 15px;
+            margin-left: 10px;
+            font-size: 18px;
         }
         .container {
             flex-grow: 1;
@@ -99,6 +102,16 @@ $stmt->close();
             background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
+        }
+        .nav-button {
+            background-color: transparent;
+            align-items: center;
+            border: none;
+            border-radius: 10px;
+            padding: 8px;
+        }
+        .nav-button:hover {
+            background-color:rgb(59, 37, 252);
         }
         .btn-custom {
             background-color: #ffffff;
@@ -127,8 +140,15 @@ $stmt->close();
 </head>
 <body>
     <nav>
-        <a href="index.php">Home</a>
-        <a href="logout.php">Logout</a>
+        <div style="font-weight: bold"> Dashboard</div>
+        <div>
+            <button class="nav-button">
+                <a href="index.php">Home</a>
+            </button>
+            <button class="nav-button">
+                <a href="logout.php">Logout</a>
+            </button>
+        </div>
     </nav>
 
     <div class="container">
